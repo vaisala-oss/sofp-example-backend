@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Example backend for sofp-core, showing how integration and packaging is achieved",
   "main": "dist/index.js",
+  "sofp-backend": "SofpMockBackend",
   "scripts": {
     "build": "tsc",
     "test": "jest dist/**.test.js"
