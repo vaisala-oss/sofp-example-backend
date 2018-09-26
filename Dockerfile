@@ -7,8 +7,9 @@ USER root
 COPY . backends/sofp-mock-backend
 
 WORKDIR  ./backends/sofp-mock-backend
+RUN npm install
 RUN npm run build
-RUN npm test
+RUN npm run test
 
 
 # Revert back to the original work directory and the proper user
