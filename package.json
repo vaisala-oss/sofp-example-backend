@@ -1,0 +1,35 @@
+{
+  "name": "sofp-mock-backend",
+  "version": "0.0.1",
+  "description": "Example backend for sofp-core, showing how integration and packaging is achieved",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest dist/**.test.js"
+  },
+  "engines": {
+    "node": "^8.11.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spatineo/sofp-mock-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spatineo/sofp-mock-backend/issues"
+  },
+  "homepage": "https://github.com/spatineo/sofp-mock-backend#readme",
+  "dependencies": {
+    "express": "~4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "~1.18.3",
+    "jest": "~23.6.0",
+    "typescript": "~2.9.2",
+    "@types/node": "~10.9.3",
+    "ts-node": "~7.0.1",
+    "@types/jest": "~23.3.1",
+    "ts-jest": "~23.1.4"
+  }
+}
