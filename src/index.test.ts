@@ -1,5 +1,5 @@
-import {SofpMockBackend} from './';
+import {SofpExampleBackend} from './';
 
-test('Mock backend has single collection', () => {
-    expect(SofpMockBackend.collections.length).toBe(1);
+test('Example backend has single collection', () => {
+    expect(SofpExampleBackend.collections.length).toBe(1);
 });

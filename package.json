@@ -1,9 +1,9 @@
 {
-  "name": "sofp-mock-backend",
+  "name": "sofp-example-backend",
   "version": "0.0.1",
   "description": "Example backend for sofp-core, showing how integration and packaging is achieved",
   "main": "dist/index.js",
-  "sofp-backend": "SofpMockBackend",
+  "sofp-backend": "SofpExampleBackend",
   "scripts": {
     "build": "tsc",
     "test": "jest dist/**.test.js"
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spatineo/sofp-mock-backend.git"
+    "url": "git+https://github.com/vaisala-oss/sofp-example-backend.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spatineo/sofp-mock-backend/issues"
+    "url": "https://github.com/vaisala-oss/sofp-example-backend/issues"
   },
-  "homepage": "https://github.com/spatineo/sofp-mock-backend#readme",
+  "homepage": "https://github.com/vaisala-oss/sofp-example-backend#readme",
   "contributors": [
     {
       "name": "Sampo Savolainen",
@@ -28,6 +28,7 @@
     }
   ],
   "dependencies": {
+    "sofp-lib": "0.0.1"
   },
   "devDependencies": {
     "jest": "~23.6.0",

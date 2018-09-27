@@ -1,6 +1,6 @@
-import {Backend, Collection, Link, Query, FeatureCursor, Feature} from '../../sofp-core';
+import {Backend, Collection, Link, Query, FeatureCursor, Feature} from 'sofp-lib';
 
-let SofpMockBackend = new Backend('SofpMockBackend');
+let SofpExampleBackend = new Backend('SofpExampleBackend');
 
 class MockCollection implements Collection {
     name : string = 'mock-collection';
@@ -17,11 +17,11 @@ class MockCollection implements Collection {
         return new(class FooFeatureCursor implements FeatureCursor {
             hasNext() : boolean { return false; }
             next() : Feature { return null; }
-            remainingFilter = []
+            remainingFilter = query.filters
         })();
     }
 };
 
-SofpMockBackend.collections.push(new MockCollection());
+SofpExampleBackend.collections.push(new MockCollection());
 
-export {SofpMockBackend};
+export {SofpExampleBackend};
