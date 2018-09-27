@@ -1,4 +1,4 @@
-import {Backend, Collection, Link, Query, FeatureCursor, Feature} from 'sofp-lib';
+import {Backend, Collection, Link, Query, FeatureStream, Feature} from 'sofp-lib';
 
 let SofpExampleBackend = new Backend('SofpExampleBackend');
 
@@ -13,12 +13,11 @@ class MockCollection implements Collection {
         title:    'Spatineo Website'
     }];
 
-    executeQuery(query : Query) : FeatureCursor {
-        return new(class FooFeatureCursor implements FeatureCursor {
-            hasNext() : boolean { return false; }
-            next() : Feature { return null; }
-            remainingFilter = query.filters
-        })();
+    executeQuery(query : Query) : FeatureStream {
+        var ret = new FeatureStream();
+        ret.remainingFilter = query.filters;
+        ret.push(null);
+        return ret;
     }
 };
 

@@ -29,7 +29,7 @@
     }
   ],
   "dependencies": {
-    "sofp-lib": "0.0.1"
+    "sofp-lib": "0.0.2"
   },
   "devDependencies": {
     "nodemon": "~1.18.3",
