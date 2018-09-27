@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "sofp-backend": "SofpExampleBackend",
   "scripts": {
+    "start": "tsc -w & nodemon ../sofp-core/dist/server/app.js .",
     "build": "tsc",
     "test": "jest dist/**.test.js"
   },
@@ -31,6 +32,7 @@
     "sofp-lib": "0.0.1"
   },
   "devDependencies": {
+    "nodemon": "~1.18.3",
     "jest": "~23.6.0",
     "typescript": "~2.9.2",
     "@types/node": "~10.9.3",
