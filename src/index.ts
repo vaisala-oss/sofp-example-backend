@@ -30,7 +30,7 @@ class GeoJSONCollection implements Collection {
     constructor(name, description, jsonFile) {
         this.name = name;
         this.description = description;
-        this.data = require(process.cwd()+'/'+jsonFile);
+        this.data = require(__dirname+'/../'+jsonFile);
     }
 
     executeQuery(query : Query) : FeatureStream {
