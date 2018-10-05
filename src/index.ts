@@ -38,17 +38,20 @@ class GeoJSONCollection implements Collection {
         // This example does no filtering of it's own
         ret.remainingFilter = query.filters;
         var idx = query.skip;
+        var outputCount = 0;
         var that = this;
 
         function next() {
-            if (idx >= that.data.features.length || idx >= (query.skip + query.limit)) {
+            if (idx >= that.data.features.length || outputCount >= query.limit) {
                 ret.push(null);
                 return;
             }
             var item = that.data.features[idx];
             
             idx++;
-            ret.push(item);
+            if (ret.push(item)) {
+                outputCount++;
+            }
             setTimeout(next, 5);
         }
         
