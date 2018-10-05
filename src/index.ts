@@ -37,11 +37,11 @@ class GeoJSONCollection implements Collection {
         var ret = new FeatureStream();
         // This example does no filtering of it's own
         ret.remainingFilter = query.filters;
-        var idx = 0;
+        var idx = query.skip;
         var that = this;
 
         function next() {
-            if (idx >= that.data.features.length) {
+            if (idx >= that.data.features.length || idx >= (query.skip + query.limit)) {
                 ret.push(null);
                 return;
             }
