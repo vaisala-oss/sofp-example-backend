@@ -4,8 +4,10 @@ test('Example backend has single collection', () => {
     expect(SofpExampleBackend.collections.length).toBe(1);
 });
 
-test('Example backend collection returns no features', done => {
+test('Example backend collection, no filter, returns 7 features', done => {
     var stream = SofpExampleBackend.collections[0].executeQuery({
+        skip: 0,
+        limit: 7,
         featureName: SofpExampleBackend.collections[0].name,
         filters: []
     });
@@ -16,7 +18,56 @@ test('Example backend collection returns no features', done => {
     });
 
     stream.on('end', () => {
-        expect(objectsReceived).toBe(0);
+        expect(objectsReceived).toBe(7);
+        done();
+    });
+});
+
+test('Example backend collection, filter that discards every other feature, returns 7 features', done => {
+    var n = 0;
+    var stream = SofpExampleBackend.collections[0].executeQuery({
+        skip: 0,
+        limit: 7,
+        featureName: SofpExampleBackend.collections[0].name,
+        filters: [{
+            accept: f => {
+                return (n++ % 1) === 0;
+            }
+        }]
+    });
+
+    var objectsReceived = 0;
+    stream.on('data', obj => {
+        objectsReceived++;
+    });
+
+    stream.on('end', () => {
+        expect(objectsReceived).toBe(7);
+        done();
+    });
+});
+
+
+test('Example backend collection, skip 95, limit 10, returns 5 features (since collection has 100)', done => {
+    var n = 0;
+    var stream = SofpExampleBackend.collections[0].executeQuery({
+        skip: 95,
+        limit: 10,
+        featureName: SofpExampleBackend.collections[0].name,
+        filters: [{
+            accept: f => {
+                return (n++ % 1) === 0;
+            }
+        }]
+    });
+
+    var objectsReceived = 0;
+    stream.on('data', obj => {
+        objectsReceived++;
+    });
+
+    stream.on('end', () => {
+        expect(objectsReceived).toBe(5);
         done();
     });
 });

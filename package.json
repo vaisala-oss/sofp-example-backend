@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/vaisala-oss/sofp-example-backend.git"
   },
-  "author": "",
+  "author": "Vaisala Oyj",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vaisala-oss/sofp-example-backend/issues"
