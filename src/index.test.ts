@@ -23,15 +23,15 @@ test('Example backend collection, no filter, returns 7 features', done => {
     });
 });
 
-test('Example backend collection, filter that discards every other feature, returns 7 features', done => {
+test('Example backend collection, filter that discards every other feature, skip 50 & limit 100, returns 25 features', done => {
     var n = 0;
     var stream = SofpExampleBackend.collections[0].executeQuery({
-        skip: 0,
-        limit: 7,
+        skip: 50,
+        limit: 100,
         featureName: SofpExampleBackend.collections[0].name,
         filters: [{
             accept: f => {
-                return (n++ % 1) === 0;
+                return (n++ % 2) === 0;
             }
         }]
     });
@@ -42,7 +42,7 @@ test('Example backend collection, filter that discards every other feature, retu
     });
 
     stream.on('end', () => {
-        expect(objectsReceived).toBe(7);
+        expect(objectsReceived).toBe(25);
         done();
     });
 });
