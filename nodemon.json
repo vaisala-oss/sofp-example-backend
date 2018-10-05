@@ -1,6 +1,7 @@
 {
   "watch": [
-    "dist/"
+    "dist/",
+    "../sofp-core/dist/"
   ],
   "ext": "ts js json"
 }
