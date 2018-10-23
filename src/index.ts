@@ -1,5 +1,7 @@
 import {Backend, Collection, Link, Query, FeatureStream, Feature} from 'sofp-lib';
 
+import * as _ from 'lodash';
+
 let SofpExampleBackend = new Backend('SofpExampleBackend');
 
 interface GeoJSONGeometry {
@@ -56,6 +58,17 @@ class GeoJSONCollection implements Collection {
         }
         
         setTimeout(next, 5);
+
+        return ret;
+    }
+
+    getFeatureById(id : string) : Promise<Feature> {
+        var ret = new Promise((resolve) => {
+            setTimeout(() => {
+                var feature = _.find(this.data.features, f => f.properties.gml_id === id);
+                resolve(feature);
+            }, 5);
+        });
 
         return ret;
     }

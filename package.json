@@ -29,7 +29,8 @@
     }
   ],
   "dependencies": {
-    "sofp-lib": "0.0.5"
+    "sofp-lib": "0.0.6",
+    "lodash": "~4.17.11"
   },
   "devDependencies": {
     "nodemon": "~1.18.3",

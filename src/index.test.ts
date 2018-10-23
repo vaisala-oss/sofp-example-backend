@@ -80,3 +80,20 @@ test('Example backend collection, skip 95, limit 10, returns 5 features (since c
         done();
     });
 });
+
+test('Find feature by id (find it)', done => {
+    var n = 0;
+    SofpExampleBackend.collections[0].getFeatureById('BsWfsElement.1.20.1').then(f => {
+        expect(f).toBeDefined();
+        expect(f.properties.gml_id).toBe('BsWfsElement.1.20.1');
+        done();
+    });
+});
+
+test('Attempt to find a feature with an non-existing id', done => {
+    var n = 0;
+    SofpExampleBackend.collections[0].getFeatureById('non-existent').then(f => {
+        expect(f).toBeUndefined();
+        done();
+    });
+});
