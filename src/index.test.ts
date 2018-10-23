@@ -75,6 +75,7 @@ test('Example backend collection, skip 95, limit 10, returns 5 features (since c
     stream.on('end', () => {
         expect(objectsReceived).toBe(3);
         expect(receivedIds[0]).toBe('BsWfsElement.1.20.1');
+        expect(receivedIds[1]).toBe('BsWfsElement.1.20.3');
         expect(receivedIds[2]).toBe('BsWfsElement.1.20.5');
         done();
     });
