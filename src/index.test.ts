@@ -37,12 +37,16 @@ test('Example backend collection, filter that discards every other feature, skip
     });
 
     var objectsReceived = 0;
+    var receivedIds = [];
     stream.on('data', obj => {
+        receivedIds.push(obj.feature.properties.gml_id);
         objectsReceived++;
     });
 
     stream.on('end', () => {
         expect(objectsReceived).toBe(25);
+        expect(receivedIds[0]).toBe('BsWfsElement.1.11.1');
+        expect(receivedIds[24]).toBe('BsWfsElement.1.20.4');
         done();
     });
 });
@@ -56,18 +60,22 @@ test('Example backend collection, skip 95, limit 10, returns 5 features (since c
         featureName: SofpExampleBackend.collections[0].name,
         filters: [{
             accept: f => {
-                return (n++ % 1) === 0;
+                return (n++ % 2) === 0;
             }
         }]
     });
 
     var objectsReceived = 0;
+    var receivedIds = [];
     stream.on('data', obj => {
+        receivedIds.push(obj.feature.properties.gml_id);
         objectsReceived++;
     });
 
     stream.on('end', () => {
-        expect(objectsReceived).toBe(5);
+        expect(objectsReceived).toBe(3);
+        expect(receivedIds[0]).toBe('BsWfsElement.1.20.1');
+        expect(receivedIds[2]).toBe('BsWfsElement.1.20.5');
         done();
     });
 });
