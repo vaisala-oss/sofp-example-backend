@@ -29,7 +29,7 @@
     }
   ],
   "dependencies": {
-    "sofp-lib": "0.0.6",
+    "sofp-lib": "0.0.8",
     "lodash": "~4.17.11"
   },
   "devDependencies": {
