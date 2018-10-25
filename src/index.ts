@@ -11,7 +11,7 @@ interface GeoJSONGeometry {
 
 interface GeoJSONFeature {
     type : string;
-    properties : Map<String, any>;
+    properties : { gml_id: String };
     geometry: GeoJSONGeometry;
 };
 

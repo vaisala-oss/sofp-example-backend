@@ -25,7 +25,7 @@ Backends are packaged as docker containers that are built on top of the sofp-cor
 
 To build this particular mock backend, you can use the Dockerfile in the repository along this documentation. Clone the project, then run:
 
-  docker build -t sofp/example-backend .
+  docker build --no-cache -t sofp/example-backend .
 
 To start the image (removing the container when stopped):
 
