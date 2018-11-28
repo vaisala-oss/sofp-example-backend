@@ -1,4 +1,4 @@
-import {Backend, Collection, Link, Query, FeatureStream, Feature} from 'sofp-lib';
+import {Backend, Collection, Link, Query, FeatureStream, Feature, Filter} from 'sofp-lib';
 
 import * as _ from 'lodash';
 
@@ -43,18 +43,27 @@ class GeoJSONCollection implements Collection {
         var outputCount = 0;
         var that = this;
 
-        function next() {
-            if (nextToken >= that.data.features.length || outputCount >= query.limit) {
+        var next;
+        var propFilter : Filter = _.find(query.filters, { filterClass: 'PropertyFilter' });
+        if (propFilter && !_.isEmpty(propFilter.parameters.properties.fail)) {
+            next = function() {
+                ret.push(new Error('fail'));
                 ret.push(null);
-                return;
             }
-            var item = that.data.features[nextToken];
-            
-            nextToken++;
-            if (ret.push({ feature: item, nextToken: String(nextToken) })) {
-                outputCount++;
+        } else {
+            next = function() {
+                if (nextToken >= that.data.features.length || outputCount >= query.limit) {
+                    ret.push(null);
+                    return;
+                }
+                var item = that.data.features[nextToken];
+                
+                nextToken++;
+                if (ret.push({ feature: item, nextToken: String(nextToken) })) {
+                    outputCount++;
+                }
+                setTimeout(next, 5);
             }
-            setTimeout(next, 5);
         }
         
         setTimeout(next, 5);
