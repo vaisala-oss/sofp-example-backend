@@ -6,12 +6,12 @@ let SofpExampleBackend = new Backend('SofpExampleBackend');
 
 interface GeoJSONGeometry {
     type : string;
-    coordinates : Number[];
+    coordinates : number[];
 };
 
 interface GeoJSONFeature {
     type : string;
-    properties : { gml_id: String };
+    properties : { gml_id: string };
     geometry: GeoJSONGeometry;
 };
 
