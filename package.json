@@ -1,6 +1,6 @@
 {
   "name": "sofp-example-backend",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Example backend for sofp-core, showing how integration and packaging is achieved",
   "main": "dist/index.js",
   "sofp-backend": "SofpExampleBackend",
@@ -29,7 +29,7 @@
     }
   ],
   "dependencies": {
-    "sofp-lib": "0.2.1",
+    "sofp-lib": "0.2.2",
     "lodash": "~4.17.11"
   },
   "devDependencies": {
