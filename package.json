@@ -29,17 +29,18 @@
     }
   ],
   "dependencies": {
-    "sofp-lib": "0.2.2",
-    "lodash": "~4.17.11"
+    "@types/yargs": "12.0.2",
+    "lodash": "~4.17.11",
+    "sofp-lib": "0.2.2"
   },
   "devDependencies": {
-    "nodemon": "~1.18.3",
-    "jest": "~23.6.0",
-    "typescript": "~2.9.2",
-    "@types/node": "~10.9.3",
-    "ts-node": "~7.0.1",
     "@types/jest": "~23.3.1",
+    "@types/lodash": "4.14.116",
+    "@types/node": "~10.9.3",
+    "jest": "^24.3.1",
+    "nodemon": "~1.18.3",
     "ts-jest": "~23.1.4",
-    "@types/lodash": "4.14.116"
+    "ts-node": "~7.0.1",
+    "typescript": "~2.9.2"
   }
 }
