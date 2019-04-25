@@ -1,4 +1,4 @@
-FROM sofp/core:master
+FROM sofp/core:0.3.1
 
 # Switch to root to allow copying and building the project
 
