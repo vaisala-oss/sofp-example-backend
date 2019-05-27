@@ -1,4 +1,4 @@
-FROM sofp/core:0.3.1
+FROM sofp/core:0.4.0
 
 # Switch to root to allow copying and building the project
 
@@ -18,3 +18,4 @@ RUN npm run test
 WORKDIR ../../
 
 USER sofp-user
+CMD [ "node", "dist/server/app.js", "-a", "/tmp/foo.log" ]

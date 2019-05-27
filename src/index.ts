@@ -1,4 +1,4 @@
-import {Backend, Collection, Link, Query, FeatureStream, Feature, Filter, Property} from 'sofp-lib';
+import {Backend, Collection, Link, QueryParameter, Query, FeatureStream, Feature, Filter, Property} from 'sofp-lib';
 
 import * as _ from 'lodash';
 
@@ -36,11 +36,19 @@ class GeoJSONCollection implements Collection {
     },{
         name: 'ParameterName',
         type: 'string',
-        description: 'Name of parameter'
+        description: 'Name of parameter',
+        exampleValues : [ 'Temperature', 'Humidity' ]
     },{
         name: 'ParameterValue',
         type: 'number',
         description: 'Value of parameter'
+    }];
+
+    additionalQueryParameters : QueryParameter [] = [{
+        name : 'place',
+        type : 'string',
+        description : 'Filter returned features based on placenames',
+        exampleValues : [ 'Helsinki', 'Porvoo', 'Kuopio' ]
     }];
 
     constructor(name, description, jsonFile) {
@@ -57,27 +65,33 @@ class GeoJSONCollection implements Collection {
         var outputCount = 0;
         var that = this;
 
-        var next;
-        var propFilter : Filter = _.find(query.filters, { filterClass: 'PropertyFilter' });
-        if (propFilter && !_.isEmpty(propFilter.parameters.properties.fail)) {
-            next = function() {
-                ret.push(new Error('fail'));
+        var additionalParameterFilter : Filter = _.find(query.filters, { filterClass: 'AdditionalParameterFilter' });
+        ret.remainingFilter = _.without(query.filters, additionalParameterFilter);
+
+        var next = function() {
+            if (nextToken >= that.data.features.length || outputCount >= query.limit) {
                 ret.push(null);
+                return;
             }
-        } else {
-            next = function() {
-                if (nextToken >= that.data.features.length || outputCount >= query.limit) {
-                    ret.push(null);
-                    return;
+            var item = that.data.features[nextToken];
+            
+            nextToken++;
+            var accept = true;
+            if (accept) {
+                if (additionalParameterFilter !== undefined && additionalParameterFilter.parameters.parameters.place) {
+                    // Example data is from Helsinki, Kumpula, so only those values are accepted
+                    accept =
+                        additionalParameterFilter.parameters.parameters.place === 'Helsinki' ||
+                        additionalParameterFilter.parameters.parameters.place === 'Kumpula';
                 }
-                var item = that.data.features[nextToken];
-                
-                nextToken++;
-                if (ret.push({ feature: item, nextToken: String(nextToken) })) {
-                    outputCount++;
-                }
-                setTimeout(next, 5);
             }
+            if (accept) {
+                accept = ret.push({ feature: item, nextToken: String(nextToken) })
+            }
+            if (accept) {
+                outputCount++;
+            }
+            setTimeout(next, 5);
         }
         
         setTimeout(next, 5);
