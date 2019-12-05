@@ -23,7 +23,7 @@ interface GeoJSONFeatureCollection {
 };
 
 class GeoJSONCollection implements Collection {
-    name : string;
+    id : string;
     description : string;
     links : Link[] = [];
 
@@ -51,8 +51,8 @@ class GeoJSONCollection implements Collection {
         exampleValues : [ 'Helsinki', 'Porvoo', 'Kuopio' ]
     }];
 
-    constructor(name, description, jsonFile) {
-        this.name = name;
+    constructor(id, description, jsonFile) {
+        this.id = id;
         this.description = description;
         this.data = require(__dirname+'/../'+jsonFile);
     }

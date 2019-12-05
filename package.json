@@ -1,6 +1,6 @@
 {
   "name": "sofp-example-backend",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Example backend for sofp-core, showing how integration and packaging is achieved",
   "main": "dist/index.js",
   "sofp-backend": "SofpExampleBackend",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@types/yargs": "12.0.2",
     "lodash": "^4.17.15",
-    "sofp-lib": "0.3.4"
+    "sofp-lib": "0.4.0"
   },
   "devDependencies": {
     "@types/jest": "~23.3.1",

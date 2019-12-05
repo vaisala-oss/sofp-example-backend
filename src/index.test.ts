@@ -8,7 +8,7 @@ test('Example backend collection, no filter, returns 7 features', done => {
     var stream = SofpExampleBackend.collections[0].executeQuery({
         nextToken: null,
         limit: 7,
-        featureName: SofpExampleBackend.collections[0].name,
+        featureName: SofpExampleBackend.collections[0].id,
         filters: []
     });
 
@@ -28,7 +28,7 @@ test('Example backend collection, filter that discards every other feature, skip
     var stream = SofpExampleBackend.collections[0].executeQuery({
         nextToken: '50',
         limit: 100,
-        featureName: SofpExampleBackend.collections[0].name,
+        featureName: SofpExampleBackend.collections[0].id,
         filters: [{
             accept: f => {
                 return (n++ % 2) === 0;
@@ -57,7 +57,7 @@ test('Example backend collection, skip 95, limit 10, returns 5 features (since c
     var stream = SofpExampleBackend.collections[0].executeQuery({
         nextToken: '95',
         limit: 10,
-        featureName: SofpExampleBackend.collections[0].name,
+        featureName: SofpExampleBackend.collections[0].id,
         filters: [{
             accept: f => {
                 return (n++ % 2) === 0;
