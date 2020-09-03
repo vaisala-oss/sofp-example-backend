@@ -2,7 +2,7 @@
 
 This is an example backend for for Simple Observation Features Pilot WFS 3.0 project. The core is available at https://github.com/vaisala-oss/sofp-core
 
-© 2018 Vaisala Corporation
+© 2018-2020 Vaisala Corporation
 
 ## Developing
 
@@ -19,14 +19,12 @@ The step-by-step is as follows:
   cd sofp-example-backend
   npm start
 
-## Packaging
+## To release
 
-Backends are packaged as docker containers that are built on top of the sofp-core container. A full server is the core + at least one backend. Multiple backends can be packaged by chaining together backends so that the first backend starts from the sofp-core container, then next uses the output of the previous backend container and so forth until all backends are included.
+To release a new version, do the following:
 
-To build this particular mock backend, you can use the Dockerfile in the repository along this documentation. Clone the project, then run:
-
-  docker build --no-cache -t sofp/example-backend .
-
-To start the image (removing the container when stopped):
-
-  docker run --rm -p 127.0.0.1:8080:3000/tcp sofp/example-backend
+1. Bump the version appropriately in package.json
+2. Commit and push all changes
+3. rm -r dist/
+4. npm run build
+5. npm publish
