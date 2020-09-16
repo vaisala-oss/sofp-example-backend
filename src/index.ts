@@ -1,4 +1,5 @@
-import {Backend, Collection, Link, QueryParameter, Query, FeatureStream, Feature, Filter, Property} from 'sofp-lib';
+import {Backend, Collection, Link, QueryParameter, Query, 
+    FeatureStream, Feature, Filter, Property, PropertyReference} from 'sofp-lib';
 
 import * as _ from 'lodash';
 
@@ -42,6 +43,10 @@ class GeoJSONCollection implements Collection {
         name: 'ParameterValue',
         type: 'number',
         description: 'Value of parameter'
+    },{
+        name: 'Link',
+        type: 'string',
+        description: 'Link to this item'
     }];
 
     additionalQueryParameters : QueryParameter [] = [{
@@ -74,7 +79,11 @@ class GeoJSONCollection implements Collection {
                 return;
             }
             var item = that.data.features[nextToken];
-            
+
+            // Synthesize links as an example on how PropertyReference is used
+            item.properties = _.cloneDeep(item.properties);
+            item.properties['Link'] = new PropertyReference('forecast', item.properties.gml_id);
+
             nextToken++;
             var accept = true;
             if (accept) {
@@ -103,6 +112,10 @@ class GeoJSONCollection implements Collection {
         var ret = new Promise((resolve) => {
             setTimeout(() => {
                 var feature = _.find(this.data.features, f => f.properties.gml_id === id);
+                // Synthesize links as an example on how PropertyReference is used
+                feature.properties = _.cloneDeep(feature.properties);
+                feature.properties['Link'] = new PropertyReference('forecast', feature.properties.gml_id);
+
                 resolve(feature);
             }, 5);
         });
